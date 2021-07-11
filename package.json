@@ -1,0 +1,15 @@
+{
+	"name": "jwt-user-authentication",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"dev": "nodemon server/index.js",
+		"migrate": "npx knex migrate:latest --knexfile server/db/knexfile.js",
+		"rollback": "npx knex migrate:rollback --knexfile server/db/knexfile.js",
+		"seedrun": "npx knex seed:run --knexfile server/db/knexfile.js"
+	},
+	"author": "",
+	"license": "ISC"
+}
