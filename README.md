@@ -1,5 +1,5 @@
 # jwt user authentication 
-# (Knex - Express - PostgreSQL)
+# (Nodejs + Express + Knex + PostgreSQL)
 
 ### `npm run dev`
 Start backend server
