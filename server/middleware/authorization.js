@@ -9,13 +9,17 @@ module.exports = async (req, res, next) => {
 			return res.status(403).json('Not Authorized');
 		}
 
-		// jwt.verify will tell us wether or not the TOKEN is valid
+		// If verify passed => it will go to next line
+		// Otherwise => it will cause an error and go to 'catch (err) {}'
+		// Payload contains {user_id : user_id} which we initialized in jwtGenerator.js
+		// (Means when we generate a jwtToken, it will comes with a payload {user_id : user_id})
 		const payload = jwt.verify(jwtToken, process.env.JWT_SECRET);
 
-		// payload is in jwtGenerator
 		req.user_id = payload.user_id;
 	} catch (err) {
 		console.error(err.message);
 		return res.status(403).json('Not Authorized');
 	}
+
+	next();
 };

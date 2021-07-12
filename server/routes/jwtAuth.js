@@ -3,6 +3,7 @@ const db = require('../db/db');
 const bcrypt = require('bcrypt');
 const jwtGenerator = require('../controller/jwtGenerator');
 const validInfo = require('../middleware/validInfo');
+const authorization = require('../middleware/authorization');
 
 //`register route + validInfo middleware
 router.post('/register', validInfo, async (req, res) => {
@@ -38,6 +39,7 @@ router.post('/register', validInfo, async (req, res) => {
 			.returning('*');
 
 		// Generating jwt token
+		// Passing newUser[0].user_id is for adding it into payload
 		const token = jwtGenerator(newUser[0].user_id);
 
 		res.json({ token });
@@ -82,6 +84,24 @@ router.post('/login', validInfo, async (req, res) => {
 		console.error(err.message);
 
 		res.status(500).send('Login Failed: Unexpected Server Error');
+	}
+});
+
+//`user token verify route + authorization middleware
+router.get('/is-verify', authorization, async (req, res) => {
+	try {
+		// If the req can reach to this point
+		// => which means it already went through authorization middleware
+		// => which means it is been verified
+		// Otherwise
+		// => it will Response with Status 401 + Error Message in middleware
+		// => also will never reach to this point
+
+		res.json(true);
+	} catch (err) {
+		console.error(err.message);
+
+		res.status(500).send('User Not Verified: Unexpected Server Error');
 	}
 });
 
