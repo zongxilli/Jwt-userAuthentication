@@ -2,9 +2,10 @@ const router = require('express').Router();
 const db = require('../db/db');
 const bcrypt = require('bcrypt');
 const jwtGenerator = require('../controller/jwtGenerator');
+const validInfo = require('../middleware/validInfo');
 
-//`register route
-router.post('/register', async (req, res) => {
+//`register route + validInfo middleware
+router.post('/register', validInfo, async (req, res) => {
 	try {
 		// Destructure the req.body   ex: (user_name, user_email, user_password)
 
@@ -47,8 +48,8 @@ router.post('/register', async (req, res) => {
 	}
 });
 
-//`login route
-router.post('/login', async (req, res) => {
+//`login route + validInfo middleware
+router.post('/login', validInfo, async (req, res) => {
 	try {
 		// Destructure the req.body   ex: (user_name, user_email, user_password)
 		const { user_email, user_password } = req.body;
@@ -85,5 +86,3 @@ router.post('/login', async (req, res) => {
 });
 
 module.exports = router;
-
-//`看到 1:06:50 该看 Create JWT middleware 了
