@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+require('dotenv').config({path: 'client/.env'});
 
 // middleware
 
@@ -15,6 +16,6 @@ app.use('/auth', require('./routes/jwtAuth'));
 // dashboard route
 app.use('/dashboard', require('./routes/dashboard'));
 
-app.listen(5000, () => {
-	console.log('server is running on port 5000');
+app.listen(process.env.SERVER_PORT, () => {
+	console.log(`server is running on port ${process.env.SERVER_PORT}`);
 });

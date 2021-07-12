@@ -11,5 +11,8 @@
 		"seedrun": "npx knex seed:run --knexfile server/db/knexfile.js"
 	},
 	"author": "",
-	"license": "ISC"
+	"license": "ISC",
+	"dependencies": {
+		"dotenv": "^10.0.0"
+	}
 }
