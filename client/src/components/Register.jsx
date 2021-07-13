@@ -2,7 +2,7 @@ import React, { Fragment, useState } from 'react';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const Register = () => {
+const Register = ({ setAuth }) => {
 	const [inputs, setInputs] = useState({
 		email: '',
 		password: '',
@@ -12,8 +12,6 @@ const Register = () => {
 	const { email, password, name } = inputs;
 	const onChange = (e) => {
 		setInputs({ ...inputs, [e.target.name]: e.target.value });
-
-		console.log(process.env);
 	};
 
 	const onSubmitForm = async (e) => {
@@ -22,11 +20,12 @@ const Register = () => {
 		try {
 			const destructure = { email, password, name };
 
-      const body = {
-        user_email : destructure.email,
-        user_password : destructure.password,
-        user_name : destructure.name,
-      }
+			// Because my server is waiting for {user_name, user_email, user_password }
+			const body = {
+				user_email: destructure.email,
+				user_password: destructure.password,
+				user_name: destructure.name,
+			};
 
 			const response = await fetch(
 				`http://localhost:${process.env.REACT_APP_SERVER_PORT}/auth/register`,
@@ -39,7 +38,9 @@ const Register = () => {
 
 			const parseResponse = await response.json();
 
-			console.log(parseResponse);
+			localStorage.setItem('token', parseResponse.token);
+
+      setAuth(true);
 		} catch (err) {
 			console.error(err.message);
 		}
