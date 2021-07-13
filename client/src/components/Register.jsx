@@ -2,6 +2,8 @@ import React, { Fragment, useState } from 'react';
 import dotenv from 'dotenv';
 dotenv.config();
 
+import { Link } from 'react-router-dom';
+
 const Register = ({ setAuth }) => {
 	const [inputs, setInputs] = useState({
 		email: '',
@@ -18,14 +20,12 @@ const Register = ({ setAuth }) => {
 		e.preventDefault();
 
 		try {
-			const destructure = { email, password, name };
-
 			// Because my server is waiting for {user_name, user_email, user_password }
-      // {user_name, user_email, user_password } is the name of Cols in database
+			// {user_name, user_email, user_password } is the name of Cols in database
 			const body = {
-				user_email: destructure.email,
-				user_password: destructure.password,
-				user_name: destructure.name,
+				user_email: email,
+				user_password: password,
+				user_name: name,
 			};
 
 			const response = await fetch(
@@ -41,7 +41,7 @@ const Register = ({ setAuth }) => {
 
 			localStorage.setItem('token', parseResponse.token);
 
-      setAuth(true);
+			setAuth(true);
 		} catch (err) {
 			console.error(err.message);
 		}
@@ -77,6 +77,7 @@ const Register = ({ setAuth }) => {
 				/>
 				<button className="btn-success btn-lock">Submit</button>
 			</form>
+			<Link to="/login">Login</Link>
 		</Fragment>
 	);
 };
