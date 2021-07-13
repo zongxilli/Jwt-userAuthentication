@@ -21,6 +21,14 @@ const Dashboard = ({ setAuth }) => {
 		}
 	}
 
+	const logout = (e) => {
+		e.preventDefault();
+
+		localStorage.removeItem('token');
+
+		setAuth(false);
+	};
+
 	useEffect(() => {
 		getName();
 	}, []);
@@ -28,7 +36,9 @@ const Dashboard = ({ setAuth }) => {
 	return (
 		<Fragment>
 			<h1>Dashboard --- user: {name}</h1>
-      <button className="btn btn-primary" >Log Out</button>
+			<button className="btn btn-primary" onClick={(e) => logout(e)}>
+				Log Out
+			</button>
 		</Fragment>
 	);
 };
