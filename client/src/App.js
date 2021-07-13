@@ -5,6 +5,10 @@ import Dashboard from './components/Dashboard';
 import Login from './components/Login';
 import Register from './components/Register';
 
+import dotenv from 'dotenv';
+dotenv.config();
+
+
 function App() {
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
 

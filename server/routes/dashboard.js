@@ -9,12 +9,12 @@ router.get('/', authorization, async (req, res) => {
 		// (See authorization.js ->  req.user_id = payload.user_id; )
 		// (payload is from jwtGenerator.js -> const payload = {user_id: user_id} )
 		// We have the user_id -> we can get the user full information from database
-		const userInfo = await db
-			.select()
+		const userName = await db
+			.select('user_name')
 			.from('user')
 			.where('user_id', req.user_id);
 
-		res.json(userInfo[0]);
+		res.json(userName[0]);
 	} catch (err) {
 		console.error(err.message);
 

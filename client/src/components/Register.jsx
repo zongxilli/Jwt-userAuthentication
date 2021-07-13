@@ -1,6 +1,4 @@
 import React, { Fragment, useState } from 'react';
-import dotenv from 'dotenv';
-dotenv.config();
 
 import { Link } from 'react-router-dom';
 

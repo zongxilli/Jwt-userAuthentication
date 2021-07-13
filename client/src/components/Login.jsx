@@ -33,8 +33,8 @@ const Login = ({ setAuth }) => {
 			localStorage.setItem('token', parseResponse.token);
 
 			setAuth(true);
-		} catch (error) {
-			console.error(error.message);
+		} catch (err) {
+			console.error(err.message);
 		}
 	};
 
