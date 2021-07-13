@@ -21,6 +21,7 @@ const Register = ({ setAuth }) => {
 			const destructure = { email, password, name };
 
 			// Because my server is waiting for {user_name, user_email, user_password }
+      // {user_name, user_email, user_password } is the name of Cols in database
 			const body = {
 				user_email: destructure.email,
 				user_password: destructure.password,
