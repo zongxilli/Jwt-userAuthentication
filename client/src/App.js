@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import './App.css';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import Dashboard from './components/Dashboard';
@@ -8,13 +8,37 @@ import Register from './components/Register';
 import dotenv from 'dotenv';
 dotenv.config();
 
-
 function App() {
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
 
 	const setAuth = (boolean) => {
 		setIsAuthenticated(boolean);
 	};
+
+	async function isAuth() {
+		try {
+			// authentication middleware => return true if user is authenticated, false otherwise
+			const response = await fetch(
+				`http://localhost:${process.env.REACT_APP_SERVER_PORT}/auth/is-verify`,
+				{
+					method: 'GET',
+					headers: { token: localStorage.token },
+				}
+			);
+
+			const parseResponse = await response.json();
+
+			parseResponse === true
+				? setIsAuthenticated(true)
+				: setIsAuthenticated(false);
+		} catch (error) {
+			console.error(error.message);
+		}
+	}
+
+	useEffect(() => {
+		isAuth();
+	});
 
 	return (
 		<Fragment>
