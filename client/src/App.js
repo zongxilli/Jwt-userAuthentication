@@ -5,6 +5,11 @@ import Dashboard from './components/Dashboard';
 import Login from './components/Login';
 import Register from './components/Register';
 
+// react-toastify better do this at root file
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+toast.configure()
+
 import dotenv from 'dotenv';
 dotenv.config();
 

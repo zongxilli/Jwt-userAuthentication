@@ -39,7 +39,7 @@ router.post('/register', validInfo, async (req, res) => {
 			.returning('*');
 
 		// Generating jwt token
-		// Passing newUser[0].user_id is for adding it into payload
+		// Passing newUser[0].user_id is for adding it into payload in jwtGenerator
 		const token = jwtGenerator(newUser[0].user_id);
 
 		res.json({ token });
@@ -63,7 +63,7 @@ router.post('/login', validInfo, async (req, res) => {
 			.where('user_email', user_email);
 
 		if (userInfo.length === 0) {
-			return res.status(401).send('Please double check your email or password');
+			return res.status(401).json('Please double check your email or password');
 		}
 
 		// Check if the password (user typed) is as same sa the password in database
