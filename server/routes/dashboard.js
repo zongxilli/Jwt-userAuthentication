@@ -2,6 +2,7 @@ const router = require('express').Router();
 const db = require('../db/db');
 const authorization = require('../middleware/authorization');
 
+
 //` dashboard route + authorization middleware
 router.get('/', authorization, async (req, res) => {
 	try {
