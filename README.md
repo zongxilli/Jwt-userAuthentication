@@ -16,3 +16,6 @@ Put it into client folder and add
 `REACT_APP_SERVER_PORT=< your port >`
 `SERVER_PORT=< should be same as last one >`
 `JWT_SECRET = < >`
+
+## knexfile.js
+Set up your own postgre config
